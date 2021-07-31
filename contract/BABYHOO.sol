@@ -294,7 +294,8 @@ contract BABYHOO is ERC20, Ownable {
         require(from != address(0), "ERC20: transfer from the zero address");
         require(to != address(0), "ERC20: transfer to the zero address");
         require(!_isBlacklisted[from] && !_isBlacklisted[to], 'Blacklisted address');
-        require(amount <= _maxTxAmount, "Transfer amount exceeds the maxTxAmount.");
+        if(from != owner() && to != owner())
+             require(amount <= _maxTxAmount, "Transfer amount exceeds the maxTxAmount.");
 
         if(amount == 0) {
             super._transfer(from, to, 0);

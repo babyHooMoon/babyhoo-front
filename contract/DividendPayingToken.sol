@@ -16,7 +16,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
     using SafeMathUint for uint256;
     using SafeMathInt for int256;
 
-    address public MDX = address(0x9C65AB58d8d978DB963e63f2bfB7121627e3a739); //MDX
+    address public HOO = address(0xE1d1F66215998786110Ba0102ef558b22224C016); //HOO
 
 
     // With `magnitude`, we can properly distribute dividends even if the amount of received ether is small.
@@ -47,7 +47,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
     }
 
 
-    function distributeMDXDividends(uint256 amount) public onlyOwner{
+    function distributeHOODividends(uint256 amount) public onlyOwner{
         require(totalSupply() > 0);
 
         if (amount > 0) {
@@ -73,7 +73,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
         if (_withdrawableDividend > 0) {
             withdrawnDividends[user] = withdrawnDividends[user].add(_withdrawableDividend);
             emit DividendWithdrawn(user, _withdrawableDividend);
-            bool success = IERC20(MDX).transfer(user, _withdrawableDividend);
+            bool success = IERC20(HOO).transfer(user, _withdrawableDividend);
 
             if(!success) {
                 withdrawnDividends[user] = withdrawnDividends[user].sub(_withdrawableDividend);
